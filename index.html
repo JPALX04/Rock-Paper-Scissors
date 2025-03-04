@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let computerChoice;
+      let humanChoice;
+      let humanScore = 0;
+      let computerScore = 0;
+
+      //function to get the computer choice
+      function getComputerChoice() {
+        return (computerChoice = Math.floor(Math.random() * 3) + 1);
+      }
+
+      //function to get the human choice
+      function getHumanChoice() {
+        let choice = prompt(
+          "choose your weapon: Rock, paper or scissor",
+          ""
+        ).toLowerCase();
+        if (choice === "rock") {
+          return 1;
+        } else if (choice === "paper") {
+          return 2;
+        } else if (choice === "scissor") {
+          return 3;
+        } else {
+          alert("Select a valid value");
+          getHumanChoice();
+        }
+      }
+
+      humanChoice = getHumanChoice();
+      console.log(hChoice);
+
+      //game round
+      function playRound(humanChoice, computerChoice) {
+        if (humanChoice === computerChoice) {
+          console.log("This is a draw");
+        } else if (humanChoice === "rock") {
+          switch (computerChoice) {
+            case "paper":
+              humanScore++;
+              console.log("You won");
+              break;
+            case "scissor":
+              computerScore++;
+              console.log("You lost");
+              break;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
