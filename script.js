@@ -3,14 +3,30 @@ let humanChoice;
 let humanScore = 0;
 let computerScore = 0;
 
-document.body.addEventListener("click", (e) => {
-  if (e.target.nodeName.toLowerCase() === "button") {
-    humanChoice = e.target.textContent.toLowerCase();
-    computerChoice = getComputerChoice();
+const humanScoreBoard = document.querySelector(".human-score");
+const computerScoreBoard = document.querySelector(".computer-score");
+computerScoreBoard.textContent = `Machine score: ${computerScore}`;
+humanScoreBoard.textContent = `Human score: ${humanScore}`;
 
-    playRound();
+const buttonContainer = document.querySelector(".buttonContainer");
+const gameResult = document.querySelector(".gameResult");
+
+let clickHandler;
+
+function gameStart() {
+  if (clickHandler) {
+    buttonContainer.removeEventListener("click", clickHandler);
   }
-});
+
+  clickHandler = (uiChoice) => {
+    if (uiChoice.target.nodeName.toLowerCase() === "button") {
+      humanChoice = uiChoice.target.textContent.toLowerCase();
+    }
+    computerChoice = getComputerChoice();
+    playRound();
+  };
+  buttonContainer.addEventListener("click", clickHandler);
+}
 
 //function to get the computer choice
 function getComputerChoice() {
@@ -23,96 +39,80 @@ function getComputerChoice() {
       return (computerChoice = "paper");
       break;
     case 3:
-      return (computerChoice = "scissor");
+      return (computerChoice = "scissors");
       break;
   }
 }
 
 //game round
 function playRound() {
-  // console.log(computerChoice); //<== test if the logic was correct
-  // console.log(humanChoice);
-
   if (humanChoice === computerChoice) {
-    console.log("This is a draw");
+    gameResult.textContent = "This is a draw";
   } else if (humanChoice === "rock") {
     switch (computerChoice) {
       case "paper":
         ++computerScore;
-        console.log("You lose! Paper beats Rock");
-
+        computerScoreBoard.textContent = `Machine score: ${computerScore}`;
+        gameResult.textContent = "You lose! Paper beats Rock";
         break;
-      case "scissor":
+      case "scissors":
         ++humanScore;
-        console.log("You won! Rock beats Scissor!");
-
+        humanScoreBoard.textContent = `Human score: ${humanScore}`;
+        gameResult.textContent = "You won! Rock beats Scissor!";
         break;
     }
   } else if (humanChoice === "paper") {
     switch (computerChoice) {
       case "rock":
         ++humanScore;
-        console.log("You won! Paper beats Rock!");
-
+        humanScoreBoard.textContent = `Human score: ${humanScore}`;
+        gameResult.textContent = "You won! Paper beats Rock!";
         break;
-      case "scissor":
+      case "scissors":
         ++computerScore;
-        console.log("You lose! Scissor beats Paper");
+        computerScoreBoard.textContent = `Machine score: ${computerScore}`;
+        gameResult.textContent = "You lose! Scissor beats Paper";
+        break;
     }
-  } else if (humanChoice === "scissor") {
+  } else if (humanChoice === "scissors") {
     switch (computerChoice) {
       case "paper":
         ++humanScore;
-        console.log("You won! Scissor beats Paper");
-
+        humanScoreBoard.textContent = `Human score: ${humanScore}`;
+        gameResult.textContent = "You won! Scissor beats Paper";
         break;
       case "rock":
         ++computerScore;
-        console.log("You lose! Rock beats Scissor");
+        computerScoreBoard.textContent = `Machine score: ${computerScore}`;
+        gameResult.textContent = "You lose! Rock beats Scissor";
+        break;
     }
   }
-  // playGame();
+  playGame();
 }
 
-//function to get the human choice
-// function getHumanChoice() {
-//   humanChoice = e.target;
-
-//   switch (humanChoice) {
-//     case "rock":
-//       return humanChoice;
-//       break;
-//     case "paper":
-//       return humanChoice;
-//       break;
-//     case "scissor":
-//       return humanChoice;
-//       break;
-//     default:
-//       alert("Type one of the options!");
-//       getHumanChoice();
-//   }
-// }
-
-//function to play 5 rounds
-
-// function playGame() {
-//   if (humanScore < 5 && computerScore < 5) {
-//     console.log(`Your score is: ${humanScore}`);
-//     console.log(`The Machine score is: ${computerScore}`);
-//     playRound();
-//   } else if (humanScore === 5) {
-//     alert("You've beaten the machine!");
-//     humanScore = 0;
-//     computerScore = 0;
-//     console.clear();
-//     playGame();
-//   } else if (computerScore === 5) {
-//     alert("You lose! The machines will take control of the world");
-//     humanScore = 0;
-//     computerScore = 0;
-//     console.clear();
-//     playGame();
-//   }
-// }
-// playGame();
+// //function to play 5 rounds
+function playGame() {
+  for (let i = 0; i <= 6; i++) {
+    switch (computerScore) {
+      case 5:
+        alert("You lose! The machines will take control of the world");
+        computerScore = 0;
+        humanScore = 0;
+        break;
+    }
+    switch (humanScore) {
+      case 5:
+        alert("You've beaten the machine!");
+        humanScore = 0;
+        computerScore = 0;
+        break;
+    }
+    if (humanScore <= 5 && computerScore <= 5) {
+      gameStart();
+    }
+    humanScoreBoard.textContent = `Human score: ${humanScore}`;
+    computerScoreBoard.textContent = `Machine score: ${computerScore}`;
+  }
+}
+gameStart();
