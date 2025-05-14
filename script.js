@@ -3,14 +3,12 @@ let humanChoice;
 let humanScore = 0;
 let computerScore = 0;
 
+const buttonContainer = document.querySelector(".uiChoice");
+
 const humanScoreBoard = document.querySelector(".human-score");
 const computerScoreBoard = document.querySelector(".computer-score");
 computerScoreBoard.textContent = `Machine score: ${computerScore}`;
 humanScoreBoard.textContent = `Human score: ${humanScore}`;
-
-const buttonContainer = document.querySelector(".buttonContainer");
-const gameResult = document.querySelector(".gameResult");
-
 let clickHandler;
 
 function gameStart() {
@@ -19,8 +17,8 @@ function gameStart() {
   }
 
   clickHandler = (uiChoice) => {
-    if (uiChoice.target.nodeName.toLowerCase() === "button") {
-      humanChoice = uiChoice.target.textContent.toLowerCase();
+    if (uiChoice.target.nodeName.toLowerCase() === "img") {
+      humanChoice = uiChoice.target.alt.toLowerCase();
     }
     computerChoice = getComputerChoice();
     playRound();
@@ -46,6 +44,8 @@ function getComputerChoice() {
 
 //game round
 function playRound() {
+  let gameResult = document.querySelector(".gameResult");
+
   if (humanChoice === computerChoice) {
     gameResult.textContent = "This is a draw";
   } else if (humanChoice === "rock") {
@@ -96,14 +96,17 @@ function playGame() {
   for (let i = 0; i <= 6; i++) {
     switch (computerScore) {
       case 5:
-        alert("You lose! The machines will take control of the world");
+        let endGame = document.querySelector(".endGame");
+        endGame.textContent =
+          "You lose! The machines will take control of the world";
         computerScore = 0;
         humanScore = 0;
         break;
     }
     switch (humanScore) {
       case 5:
-        alert("You've beaten the machine!");
+        let endGame = document.querySelector(".endGame");
+        endGame.textContent = "You've beaten the machine!";
         humanScore = 0;
         computerScore = 0;
         break;
@@ -111,6 +114,7 @@ function playGame() {
     if (humanScore <= 5 && computerScore <= 5) {
       gameStart();
     }
+
     humanScoreBoard.textContent = `Human score: ${humanScore}`;
     computerScoreBoard.textContent = `Machine score: ${computerScore}`;
   }

@@ -3,19 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
     <script src="script.js" defer></script>
     <title>Rock, Paper and Scissors</title>
   </head>
   <body>
-    <div class="score-board">
-      <h1 class="human-score"></h1>
-      <h1 class="computer-score"></h1>
+    <div id="mainContainer">
+      <div class="container main">
+        <div class="container uiChoice">
+          <button><img src="./images/rock.png" alt="Rock" /></button>
+          <button><img src="./images/paper.png" alt="Paper" /></button>
+          <button><img src="./images/scissors.png" alt="scissors" /></button>
+        </div>
+        <div class="container score">
+          <h1 class="human-score"></h1>
+          <h1 class="computer-score"></h1>
+        </div>
+      </div>
+      <div class="container result">
+        <div class="gameResult"></div>
+        <div class="endGame"></div>
+      </div>
     </div>
-    <div class="gameResult"></div>
-    <div class="buttonContainer">
-      <button>Rock</button>
-      <button>Paper</button>
-      <button>Scissors</button>
-    </div>
+    <!-- <div>
+      <button class="play-again">Play Again</button>
+    </div> -->
   </body>
 </html>
