@@ -1,3 +1,7 @@
+@font-face {
+  font-family: boston;
+  src: url(./fonts/BOSTON\ CAPS.ttf);
+}
 * {
   padding: 0px;
   margin: 0px;
@@ -6,7 +10,7 @@
 }
 #mainContainer {
   /* background-image: url(./images/backGround.png); */
-  background-color: black;
+  background-color: hsla(0, 0%, 0%, 0.992);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -15,17 +19,15 @@
   justify-content: space-evenly;
 }
 
-
 .container {
   display: flex;
-  color: #063d09;
 }
 
 .main {
   height: 25vh;
   width: 50vw;
   flex-direction: column;
-  gap: 5vh;
+  gap: 4vh;
 }
 
 .uiChoice {
@@ -35,24 +37,51 @@
 }
 .score {
   justify-content: space-around;
+  font-family: "boston", sans-serif;
+  font-size: 1.3em;
+  color: #000000;
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #5bd247, 0 0 15px #5bd247,
+    0 0 20px #5bd247, 0 0 25px #063d09;
 }
 
 .result {
   width: 50vw;
-  height: 20vh;
+  height: 25vh;
   flex-direction: column;
   justify-content: space-around;
+  font-family: "boston", sans-serif;
+  font-size: 1.2em;
+  color: #ffffff;
 }
-
+.playAgain button {
+  font-family: "boston", sans-serif;
+  color: #ffffff;
+  font-size: 1.75em;
+  padding: 6px 12px;
+  background-color: #063d09;
+  border-radius: 5em;
+}
+.playAgain {
+  display: flex;
+  color: #ffffff;
+  justify-content: center;
+}
 .gameResult,
 .endGame {
   text-align: center;
   font-size: 2em;
 }
-button{
+button {
   background-color: transparent;
   border: none;
 }
 img {
   height: 25vh;
+  filter: drop-shadow(0 0 0.75rem #063d09) drop-shadow(0 0 0.75em #063d09);
+}
+
+img:hover {
+  height: 27vh;
+  filter: drop-shadow(0 0 0.9rem #5bd247) drop-shadow(0 0 0.9em #063d09);
+  transition: 0.5s;
 }

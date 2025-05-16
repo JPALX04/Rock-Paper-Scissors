@@ -4,6 +4,8 @@ let humanScore = 0;
 let computerScore = 0;
 
 const buttonContainer = document.querySelector(".uiChoice");
+let playAgain = document.querySelector(".playAgain");
+playAgain.style.display = "none";
 
 const humanScoreBoard = document.querySelector(".human-score");
 const computerScoreBoard = document.querySelector(".computer-score");
@@ -93,22 +95,21 @@ function playRound() {
 
 // //function to play 5 rounds
 function playGame() {
-  for (let i = 0; i <= 6; i++) {
+  let playAgain = document.querySelector(".playAgain");
+  for (let i = 0; i <= 5; i++) {
     switch (computerScore) {
       case 5:
         let endGame = document.querySelector(".endGame");
         endGame.textContent =
           "You lose! The machines will take control of the world";
-        computerScore = 0;
-        humanScore = 0;
+        playAgain.style.display = "flex";
         break;
     }
     switch (humanScore) {
       case 5:
         let endGame = document.querySelector(".endGame");
         endGame.textContent = "You've beaten the machine!";
-        humanScore = 0;
-        computerScore = 0;
+        playAgain.style.display = "flex";
         break;
     }
     if (humanScore <= 5 && computerScore <= 5) {
