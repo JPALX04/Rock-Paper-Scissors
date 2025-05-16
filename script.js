@@ -2,18 +2,25 @@ let computerChoice;
 let humanChoice;
 let humanScore = 0;
 let computerScore = 0;
+let clickHandler;
+let roundGameResult;
+let playAgain;
 
 const buttonContainer = document.querySelector(".uiChoice");
-let playAgain = document.querySelector(".playAgain");
-playAgain.style.display = "none";
-
+const playAgainBTN = document.querySelector(".playAgain");
 const humanScoreBoard = document.querySelector(".human-score");
 const computerScoreBoard = document.querySelector(".computer-score");
+
+let gameResult = document.querySelector(".gameResult");
+let endGame = document.querySelector(".endGame");
+
+playAgainBTN.style.display = "none";
 computerScoreBoard.textContent = `Machine score: ${computerScore}`;
 humanScoreBoard.textContent = `Human score: ${humanScore}`;
-let clickHandler;
 
 function gameStart() {
+  playAgainBTN.style.display = "none";
+
   if (clickHandler) {
     buttonContainer.removeEventListener("click", clickHandler);
   }
@@ -46,21 +53,19 @@ function getComputerChoice() {
 
 //game round
 function playRound() {
-  let gameResult = document.querySelector(".gameResult");
-
   if (humanChoice === computerChoice) {
-    gameResult.textContent = "This is a draw";
+    gameResult.textContent = `It's a tie, the machine also picked ${humanChoice}`;
   } else if (humanChoice === "rock") {
     switch (computerChoice) {
       case "paper":
         ++computerScore;
         computerScoreBoard.textContent = `Machine score: ${computerScore}`;
-        gameResult.textContent = "You lose! Paper beats Rock";
+        gameResult.textContent = `You lose!  ${computerChoice} beats ${humanChoice}`;
         break;
       case "scissors":
         ++humanScore;
         humanScoreBoard.textContent = `Human score: ${humanScore}`;
-        gameResult.textContent = "You won! Rock beats Scissor!";
+        gameResult.textContent = `You won! ${humanChoice} beats ${computerChoice}!`;
         break;
     }
   } else if (humanChoice === "paper") {
@@ -68,12 +73,12 @@ function playRound() {
       case "rock":
         ++humanScore;
         humanScoreBoard.textContent = `Human score: ${humanScore}`;
-        gameResult.textContent = "You won! Paper beats Rock!";
+        gameResult.textContent = `You won! ${humanChoice} beats ${computerChoice}!`;
         break;
       case "scissors":
         ++computerScore;
         computerScoreBoard.textContent = `Machine score: ${computerScore}`;
-        gameResult.textContent = "You lose! Scissor beats Paper";
+        gameResult.textContent = `You lose!  ${computerChoice} beats ${humanChoice}`;
         break;
     }
   } else if (humanChoice === "scissors") {
@@ -81,12 +86,12 @@ function playRound() {
       case "paper":
         ++humanScore;
         humanScoreBoard.textContent = `Human score: ${humanScore}`;
-        gameResult.textContent = "You won! Scissor beats Paper";
+        gameResult.textContent = `You won! ${humanChoice} beats ${computerChoice}!`;
         break;
       case "rock":
         ++computerScore;
         computerScoreBoard.textContent = `Machine score: ${computerScore}`;
-        gameResult.textContent = "You lose! Rock beats Scissor";
+        gameResult.textContent = `You lose!  ${computerChoice} beats ${humanChoice}`;
         break;
     }
   }
@@ -99,20 +104,20 @@ function playGame() {
   for (let i = 0; i <= 5; i++) {
     switch (computerScore) {
       case 5:
-        let endGame = document.querySelector(".endGame");
         endGame.textContent =
           "You lose! The machines will take control of the world";
         playAgain.style.display = "flex";
+        newGame();
         break;
     }
     switch (humanScore) {
       case 5:
-        let endGame = document.querySelector(".endGame");
         endGame.textContent = "You've beaten the machine!";
         playAgain.style.display = "flex";
+        newGame();
         break;
     }
-    if (humanScore <= 5 && computerScore <= 5) {
+    if (humanScore < 5 && computerScore < 5) {
       gameStart();
     }
 
@@ -120,4 +125,26 @@ function playGame() {
     computerScoreBoard.textContent = `Machine score: ${computerScore}`;
   }
 }
+
+function newGame() {
+  buttonContainer.removeEventListener("click", clickHandler);
+  if (playAgain) {
+    playAgainBTN.removeEventListener("click", playAgain);
+  }
+
+  playAgain = (playAgainBTN) => {
+    if (playAgainBTN.target.nodeName.toLowerCase() === "button") {
+      console.log("test");
+      humanScore = 0;
+      computerScore = 0;
+      humanScoreBoard.textContent = `Human score: ${humanScore}`;
+      computerScoreBoard.textContent = `Machine score: ${computerScore}`;
+      gameResult.textContent = "   ";
+      endGame.textContent = "    ";
+      gameStart();
+    }
+  };
+  playAgainBTN.addEventListener("click", playAgain);
+}
+
 gameStart();
