@@ -10,10 +10,10 @@
 }
 body {
   background-color: hsla(0, 0%, 0%, 0.992);
+  background-image: url(./images/backGround.png);
   overflow: hidden;
 }
 #mainContainer {
-  /* background-image: url(./images/backGround.png); */
   height: 90vh;
   display: flex;
   justify-content: center;
@@ -44,8 +44,6 @@ body {
   font-family: "boston", sans-serif;
   font-size: 1.3em;
   color: #000000;
-  text-shadow: 0 0 5px #ffffff, 0 0 10px #5bd247, 0 0 15px #5bd247,
-    0 0 20px #5bd247, 0 0 25px #063d09;
 }
 
 .result {
@@ -55,16 +53,17 @@ body {
   justify-content: space-around;
   font-family: "boston", sans-serif;
   font-size: 1.2em;
-  color: #ffffff;
 }
 .playAgain button {
   font-family: "boston", sans-serif;
-  color: #ffffff;
-  font-size: 1.75em;
+  color: rgba(0, 0, 0);
+  font-size: 3rem;
   padding: 6px 12px;
-  background-color: #063d09;
+  background-color: transparent;
+  animation: fade-inout 2s infinite alternate;
   border-radius: 5em;
 }
+
 .playAgain {
   display: flex;
   color: #ffffff;
@@ -75,6 +74,29 @@ body {
   text-align: center;
   font-size: 2em;
 }
+
+@keyframes fade-inout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+.chooseWeapon {
+  animation: fade-inout 3s infinite alternate;
+  font-size: 3em;
+  text-align: center;
+  color: #000000;
+}
+.score,
+.chooseWeapon,
+.playAgain > button,
+.gameResult,
+.endGame {
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #5bd247, 0 0 15px #5bd247,
+    0 0 20px #5bd247, 0 0 25px #063d09;
+}
 button {
   background-color: transparent;
   border: none;
@@ -82,10 +104,10 @@ button {
 img {
   height: 25vh;
   filter: drop-shadow(0 0 0.75rem #063d09) drop-shadow(0 0 0.75em #063d09);
+  transition: 0.3s;
 }
 
 img:hover {
   height: 27vh;
   filter: drop-shadow(0 0 0.9rem #5bd247) drop-shadow(0 0 0.9em #063d09);
-  transition: 0.5s;
 }

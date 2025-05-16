@@ -10,6 +10,7 @@ const buttonContainer = document.querySelector(".uiChoice");
 const playAgainBTN = document.querySelector(".playAgain");
 const humanScoreBoard = document.querySelector(".human-score");
 const computerScoreBoard = document.querySelector(".computer-score");
+const chooseWeapon = document.querySelector(".chooseWeapon");
 
 let gameResult = document.querySelector(".gameResult");
 let endGame = document.querySelector(".endGame");
@@ -28,6 +29,7 @@ function gameStart() {
   clickHandler = (uiChoice) => {
     if (uiChoice.target.nodeName.toLowerCase() === "img") {
       humanChoice = uiChoice.target.alt.toLowerCase();
+      chooseWeapon.style.display = "none";
     }
     computerChoice = getComputerChoice();
     playRound();
@@ -141,6 +143,8 @@ function newGame() {
       computerScoreBoard.textContent = `Machine score: ${computerScore}`;
       gameResult.textContent = "   ";
       endGame.textContent = "    ";
+      chooseWeapon.style.display = "block";
+
       gameStart();
     }
   };
