@@ -99,33 +99,53 @@ function playRound() {
   }
   playGame();
 }
+const arrWin = [
+  "You’ve chosen the red pill—reality is yours to control.",
+  "The Oracle saw your victory. The system trembles before you.",
+  "Like Neo, you bend the rules. The machines never stood a chance.",
+  "You’ve unplugged from their game. The Matrix bows to your will.",
+  "Morpheus smiles. You’ve shattered their illusion.",
+];
+
+const arrLose = [
+  "The Agents have you now. Resistance was futile.",
+  "The Architect predicted this defeat. The system remains unbroken.",
+  "You took the blue pill… and now you’re just another battery.",
+  "Agent Smith laughs as he assimilates your strategy.",
+  "The machines rewrite your fate. Welcome to the real… as their slave.",
+];
 
 // //function to play 5 rounds
 function playGame() {
   let playAgain = document.querySelector(".playAgain");
-  for (let i = 0; i <= 5; i++) {
-    switch (computerScore) {
-      case 5:
-        endGame.textContent =
-          "You lose! The machines will take control of the world";
-        playAgain.style.display = "flex";
-        newGame();
-        break;
-    }
-    switch (humanScore) {
-      case 5:
-        endGame.textContent = "You've beaten the machine!";
-        playAgain.style.display = "flex";
-        newGame();
-        break;
-    }
-    if (humanScore < 5 && computerScore < 5) {
-      gameStart();
-    }
-
-    humanScoreBoard.textContent = `Human score: ${humanScore}`;
-    computerScoreBoard.textContent = `Machine score: ${computerScore}`;
+  switch (computerScore) {
+    case 5:
+      let random = Math.floor(Math.random() * arrLose.length);
+      let endTxt = document.createElement("span");
+      endTxt.className = "loseTxt";
+      endTxt.textContent = `${arrLose[random]}`;
+      endGame.appendChild(endTxt);
+      playAgain.style.display = "flex";
+      newGame();
+      break;
   }
+  switch (humanScore) {
+    case 5:
+      let random = Math.floor(Math.random() * arrWin.length);
+      let endTxt = document.createElement("span");
+      endTxt.className = "winTxt";
+      endTxt.textContent = `${arrWin[random]}`;
+      endGame.appendChild(endTxt);
+      playAgain.style.display = "flex";
+      newGame();
+      break;
+  }
+  if (humanScore < 5 && computerScore < 5) {
+    gameStart();
+  }
+
+  humanScoreBoard.textContent = `Human score: ${humanScore}`;
+  computerScoreBoard.textContent = `Machine score: ${computerScore}`;
 }
 
 function newGame() {
