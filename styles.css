@@ -53,13 +53,13 @@ body {
   justify-content: space-around;
   font-family: "boston", sans-serif;
   font-size: 1.2em;
-  gap: 1em
+  gap: 1em;
 }
-.result .loseTxt{
+.result .loseTxt {
   text-shadow: 0 0 5px #ffffff, 0 0 10px #ff0000, 0 0 15px #7a1c1c,
     0 0 20px #710000, 0 0 25px #2d0101;
 }
-.result .winTxt{
+.result .winTxt {
   text-shadow: 0 0 5px #ffffff, 0 0 10px #001eff, 0 0 15px #1c647a,
     0 0 20px #00716d, 0 0 25px #01222d;
 }
@@ -72,6 +72,11 @@ body {
   background-color: transparent;
   animation: fade-inout 2s infinite alternate;
   border-radius: 5em;
+  transition: 0.3s;
+}
+.playAgain > button:hover {
+  cursor: pointer;
+  font-size: 3.5rem;
 }
 
 .playAgain {
@@ -103,7 +108,8 @@ body {
 .chooseWeapon,
 .playAgain > button,
 .gameResult,
-.endGame {
+.endGame,
+footer {
   text-shadow: 0 0 5px #ffffff, 0 0 10px #5bd247, 0 0 15px #5bd247,
     0 0 20px #5bd247, 0 0 25px #063d09;
 }
@@ -118,6 +124,24 @@ img {
 }
 
 img:hover {
+  cursor: pointer;
   height: 27vh;
   filter: drop-shadow(0 0 0.9rem #5bd247) drop-shadow(0 0 0.9em #063d09);
+}
+
+footer {
+  font-family: "roboto", "Segoe UI", "Noto Sans";
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4vh;
+  text-align: center;
+}
+a:link,
+a:hover,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
 }

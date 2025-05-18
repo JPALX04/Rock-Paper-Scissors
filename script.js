@@ -53,52 +53,37 @@ function getComputerChoice() {
   }
 }
 
+const gameOptions = {
+  rock: { beats: "scissors", message: "rock beats scissors" },
+  paper: { beats: "rock", message: "paper beats rock" },
+  scissors: { beats: "paper", message: "scissors beats paper" },
+};
+
 //game round
 function playRound() {
-  if (humanChoice === computerChoice) {
-    gameResult.textContent = `It's a tie, the machine also picked ${humanChoice}`;
-  } else if (humanChoice === "rock") {
-    switch (computerChoice) {
-      case "paper":
-        ++computerScore;
-        computerScoreBoard.textContent = `Machine score: ${computerScore}`;
-        gameResult.textContent = `You lose!  ${computerChoice} beats ${humanChoice}`;
-        break;
-      case "scissors":
-        ++humanScore;
-        humanScoreBoard.textContent = `Human score: ${humanScore}`;
-        gameResult.textContent = `You won! ${humanChoice} beats ${computerChoice}!`;
-        break;
-    }
-  } else if (humanChoice === "paper") {
-    switch (computerChoice) {
-      case "rock":
-        ++humanScore;
-        humanScoreBoard.textContent = `Human score: ${humanScore}`;
-        gameResult.textContent = `You won! ${humanChoice} beats ${computerChoice}!`;
-        break;
-      case "scissors":
-        ++computerScore;
-        computerScoreBoard.textContent = `Machine score: ${computerScore}`;
-        gameResult.textContent = `You lose!  ${computerChoice} beats ${humanChoice}`;
-        break;
-    }
-  } else if (humanChoice === "scissors") {
-    switch (computerChoice) {
-      case "paper":
-        ++humanScore;
-        humanScoreBoard.textContent = `Human score: ${humanScore}`;
-        gameResult.textContent = `You won! ${humanChoice} beats ${computerChoice}!`;
-        break;
-      case "rock":
-        ++computerScore;
-        computerScoreBoard.textContent = `Machine score: ${computerScore}`;
-        gameResult.textContent = `You lose!  ${computerChoice} beats ${humanChoice}`;
-        break;
-    }
-  }
+  
+let humanBeats = gameOptions[humanChoice];
+let computerBeats = gameOptions[computerChoice];
+
+if (humanChoice === computerChoice) {
+  gameResult.textContent = `It's a tie, the machine also picked ${humanChoice}`;
+} 
+else if (humanBeats.beats === computerChoice) {
+   ++humanScore;
+ humanScoreBoard.textContent = `Human score: ${humanScore}`;
+  gameResult.textContent = `You won! ${humanChoice} beats ${computerChoice}!`;
+} 
+else if (computerBeats.beats === humanChoice) {
+  ++computerScore;
+   computerScoreBoard.textContent = `Machine score: ${computerScore}`;
+  gameResult.textContent = `You lose!  ${computerChoice} beats ${humanChoice}`;
+
+}
+
   playGame();
 }
+
+
 const arrWin = [
   "You’ve chosen the red pill—reality is yours to control.",
   "The Oracle saw your victory. The system trembles before you.",
